@@ -6,13 +6,64 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
-  background: #000000;
+  background: #020202;
   color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 300;
 }
 
+.logo-nav {
+  width: 7%;
+}
+.search {
+  padding-right: 50px;
+}
+.form-control {
+  width: 200px;
+  background-image:url(./assets/images/search.svg);
+  background-repeat: no-repeat;
+  background-position: 90%;
+  background-color: #020202;
+  backface-visibility: visible;
+}
+.navbar-collapse {
+  padding-left: 30px;
+}
+.navbar {
+  box-shadow: 1px 0px 4px;
+}
+.actions-icons li {
+  list-style-type: none;
+}
+.actions-icons {
+  display: flex;
+  padding-right: 30px;
+  justify-content: flex-end;
+}
+.user-icons  {
+  list-style: none;
+  align-items: stretch;
+  display: flex;
+  position: relative;
+  gap: 15px;
+}
+main {
+  margin-top: 3px;
+}
+.card-movies {
+  display: grid;
+    justify-content: center;
+    justify-items: center;
+    grid-template-columns: 1rem 1rem 1rem 1rem;
+    grid-template-rows: 25rem;
+    gap: 85px 300px;
+}
+
+.title-card-movies {
+  margin-top: 12px;
+  margin-left: 46px;
+}
 /*button {
   margin: 0;
   padding: 0;
