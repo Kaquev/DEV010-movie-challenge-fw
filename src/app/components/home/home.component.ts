@@ -8,11 +8,11 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
-    // YO ME EJECUTO SIEMPRE CUANDO EL COMPONENTE SE DESTRUYE
+    // Se llama justo antes de que Angular destruya el componente.
   }
 
   ngAfterViewInit() {
-    // YO ME EJECUTO DESPUES DE TENER EL HTML CARGADO, CUANDO YA LA VISTA SE VE EN LA PANTALLA
+    //  Se ejecuta cuando la vista del componente se ha inicializado por completo.
 
     // despues de 3 segundos el logo se oculta con display none
     setTimeout(() => {
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-    // YO ME EJECUTO ANTES DE CARGAR EL HTML
+    // Se EJECUTa ANTES DE CARGAR EL HTML
   }
 
 }

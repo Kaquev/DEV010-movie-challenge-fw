@@ -1,0 +1,36 @@
+.logo-nav {
+    width: 7%;
+  }
+.search {
+    padding-right: 50px;
+  }
+.form-control {
+    width: 200px;
+    background-image:url(./../../../assets/images/search.svg);
+    background-repeat: no-repeat;
+    background-position: 90%;
+    background-color: #020202;
+    backface-visibility: visible;
+  }
+
+.navbar-collapse {
+    padding-left: 30px;
+  }
+  .navbar {
+    box-shadow: 1px 0px 4px;
+  }
+.actions-icons li {
+    list-style-type: none;
+  }
+.actions-icons {
+    display: flex;
+    padding-right: 30px;
+    justify-content: flex-end;
+  }
+ .user-icons  {
+    list-style: none;
+    align-items: stretch;
+    display: flex;
+    position: relative;
+    gap: 15px;
+  }
