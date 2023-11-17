@@ -1,16 +1,13 @@
-<section class="card-movies container">
+<div class="card-movies container">
     <!-- Utilizamos *ngFor para iterar sobre las películas en moviesData -->
     <div *ngFor="let movie of moviesData" class="card">
         <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="">
-        <figure class="mat-caption">{{ movie.title }} {{ movie.release_date }}</figure>
+        <figcaption class="mat-caption">{{ movie.title }} {{ movie.release_date }}</figcaption>
     </div>
-
-
-</section>
+</div>
 
 <div class="paginator">
     <mat-paginator [length]="totalPages * page_size" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions"
         aria-label="Seleccionar página" (page)="handlePage($event)">
     </mat-paginator>
-
 </div>

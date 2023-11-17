@@ -1,0 +1,15 @@
+h3 {
+    font-size: 2rem;
+    text-shadow: -6px 9px 7px #03A678;
+
+}
+carousel-control-prev-icon {
+    color: black;
+}
+.carousel, .carousel-active, img{
+    height: 33rem;
+  }
+
+
+
+
