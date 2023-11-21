@@ -5,8 +5,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { of } from 'rxjs';
-import { Movie } from 'src/models/movie.model';
-import { MovieResult } from 'src/models/movie.model';
+import { Movie } from 'src/app/models/movie.model';
+import { MovieResult } from 'src/app/models/movie.model';
 
 describe('CardMoviesComponent', () => {
   let component: CardMoviesComponent;

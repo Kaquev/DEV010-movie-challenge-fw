@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-import { MovieResult } from 'src/models/movie.model';
+import { MovieResult } from 'src/app/models/movie.model';
 
 
 @Component({
@@ -18,19 +18,19 @@ export class CardMoviesComponent implements OnInit {
 
   constructor(
     private api: ApiService
-) {}
-    ngOnInit() {
-      this.getData(1);
-    }
-    getData(page: number) {
-      this.api.getMoviesData(page).subscribe((response: any) => {
-        this.totalPages = response.total_pages;
-        this.moviesData = response['results'];
-      });
-    }
-    handlePage(event: any) {
-      this.getData(event.pageIndex + 1); // pageIndex comienza desde 0, por eso sumamos 1
-    }
+  ) {}
+  ngOnInit() {
+    this.getData(1);
+  }
+  getData(page: number) {
+    this.api.getMoviesData(page).subscribe((response: any) => {
+      this.totalPages = response.total_pages;
+      this.moviesData = response['results'];
+    });
+  }
+  handlePage(event: any) {
+    this.getData(event.pageIndex + 1); // pageIndex comienza desde 0, por eso sumamos 1
+  }
 
 
 }

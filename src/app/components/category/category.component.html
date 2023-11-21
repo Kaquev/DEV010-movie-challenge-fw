@@ -1,0 +1,27 @@
+<app-header></app-header>
+
+<main>
+    <div class="container">
+        <div class="col-md-2 offset-md-10 mt-2">
+            <select id="order-selector" class="form-select form-select-sm" (change)="orderMovies($event)">
+                <option value="">Default</option>
+                <option value="1">Order by A-Z</option>
+                <option value="2">Order by Z-A</option>
+            </select>
+        </div>
+    </div>
+    <div class="card-movies container">
+        <!-- Utilizamos *ngFor para iterar sobre las películas en moviesData -->
+        <div *ngFor="let movie of moviesData" class="card">
+            <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="">
+            <figcaption class="mat-caption text-center">{{ movie.title }} {{ movie.release_date | date:"yyyy" }}
+            </figcaption>
+        </div>
+    </div>
+
+    <div class="paginator" *ngIf="moviesData.length > 0">
+        <mat-paginator [length]="totalPages * page_size" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions"
+            aria-label="Seleccionar página" (page)="handlePage($event)">
+        </mat-paginator>
+    </div>
+</main>

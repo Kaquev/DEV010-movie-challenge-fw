@@ -1,0 +1,35 @@
+.card-movies{
+    margin-top: 70px;
+    }
+
+    .card{
+       width: 18rem;
+       height: 30rem;
+       border: none;
+       background-color: black;
+    }
+    .card figure {
+        font-weight: 100;
+        margin-right: 20px;
+        margin-left: 15px;
+        color: white;
+
+    }
+    .card-movies {
+        display: grid;
+          justify-content: center;
+          justify-items: center;
+          grid-template-columns: 1rem 1rem 1rem 1rem;
+          gap: 85px 300px;
+      }
+      mat-paginator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        min-height: 56px;
+        padding: 0 8px;
+        flex-wrap: wrap-reverse;
+        width: 100%;
+        background-color: black;
+      }
