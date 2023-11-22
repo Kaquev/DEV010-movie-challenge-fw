@@ -19,6 +19,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.getMoviesGenres();
   }
+
+  /* getMoviesGenres llama al servicio ApiService para obtener
+  los géneros de las películas. Luego llama a divideArrayGenres
+  para dividir los géneros en grupos.*/
   getMoviesGenres() {
     this.api.getMoviesGenres().subscribe((response: any) => {
       this.moviesGenres = response["genres"];
@@ -26,14 +30,8 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  /* se toma el arreglo original y de divide en 3 partes iguales
-  (ya que sabemos el largo del arreglo que es 19)
-  entonces podemos definir el primer arreglo de 7, el segundo de 7 y el tercero lo restante (5)
-  los guardamos todos en una arreglo mas grande, para poder iterar el arreglo padre y luego
-  el arreglo hijo
-  PADRE = genresSeparates (para iterar por las 3 secciones)
-  HIJO = es cada parte del arreglo (0, 1 y la 2)
-  */
+  /*Este método divide el array de géneros en tres
+  partes iguales y las guarda en genresSeparates. */
   divideArrayGenres() {
     this.genresSeparates.push(this.moviesGenres.slice(0, 7));
     this.genresSeparates.push(this.moviesGenres.slice(7, 14));
@@ -46,3 +44,12 @@ export class HeaderComponent implements OnInit {
   }
 
 }
+
+/* se toma el arreglo original y de divide en 3 partes iguales
+  (ya que sabemos el largo del arreglo que es 19)
+  entonces podemos definir el primer arreglo de 7, el segundo de 7 y el tercero lo restante (5)
+  los guardamos todos en una arreglo mas grande, para poder iterar el arreglo padre y luego
+  el arreglo hijo
+  PADRE = genresSeparates (para iterar por las 3 secciones)
+  HIJO = es cada parte del arreglo (0, 1 y la 2)
+  */

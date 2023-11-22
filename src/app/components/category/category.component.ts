@@ -17,8 +17,12 @@ export class CategoryComponent implements OnInit {
 
   constructor(
     private api: ApiService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute  /*se inyectan las dependencias */
   ) {}
+
+  /*cuando se inicializa el componente (ngOnInit)
+  suscribe a los parámetros de la ruta y se llama a `getData`
+  para obtener los datos de la película. */
   ngOnInit() {
     this.route.params.subscribe((response) => {
       this.totalPages = 0;
@@ -26,16 +30,25 @@ export class CategoryComponent implements OnInit {
       this.getData(1, response["id"]);
     });
   }
+
+  /* getData llama al servicio ApiService para obtener los datos
+  de la película filtrados por género. */
   getData(page: number, genre: number) {
     this.api.getMoviesDataFilterByGenre(page, genre).subscribe((response: any) => {
       this.totalPages = response.total_pages;
       this.moviesData = response['results'];
     });
   }
+
+  /*Este método se llama cuando el
+  usuario cambia de página, LLama a getData con el nuevo número de página. */
   handlePage(event: any) {
     this.getData(event.pageIndex + 1, this.route.snapshot.params["id"]); // pageIndex comienza desde 0, por eso sumamos 1
   }
 
+
+  /*cuando el usuario selecciona una opción de ordenación.
+  este metodo odena los datos de la película en segun de la opción seleccionada.*/
   orderMovies(event: any) {
     if (event.target.value === '2') {
       console.log('entro al numero 2');

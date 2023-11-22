@@ -19,9 +19,16 @@
         </div>
     </div>
 
-    <div class="paginator" *ngIf="moviesData.length > 0">
+    <div class="paginator" *ngIf="moviesData.length > 0"> <!--solo si hay películas en moviesData-->
         <mat-paginator [length]="totalPages * page_size" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions"
             aria-label="Seleccionar página" (page)="handlePage($event)">
         </mat-paginator>
     </div>
 </main>
+
+<!--pipe en angular, es una forma de transformar los datos de entrada en una salida deseada
+  En Angular, se utiliza el símbolo | para aplicar un pipe a un valor.
+
+[ ] Vinculando una propiedad de un elemento HTML a una propiedad del componente
+la vinculación de propiedades con [] es unidireccional, los datos fluyen del componente
+al elemento HTML, pero no al revés-->
