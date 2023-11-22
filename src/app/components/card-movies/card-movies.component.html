@@ -1,3 +1,10 @@
+<div class="container-fluid">
+    <select id="order-selector" class="form-select form-select-sm" (change)="orderMovies($event)">
+        <option value="">select order</option>
+        <option value="1">Order by A-Z</option>
+        <option value="2">Order by Z-A</option>
+    </select>
+</div>
 <div class="card-movies container">
     <!-- Utilizamos *ngFor para iterar sobre las películas en moviesData -->
     <div *ngFor="let movie of moviesData" class="card">

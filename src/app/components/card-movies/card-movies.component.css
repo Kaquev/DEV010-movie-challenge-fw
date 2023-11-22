@@ -8,13 +8,6 @@ margin-top: 70px;
    border: none;
    background-color: black;
 }
-.card figure {
-    font-weight: 100;
-    margin-right: 20px;
-    margin-left: 15px;
-    color: white;
-
-}
 .card-movies {
     display: grid;
       justify-content: center;
@@ -32,4 +25,13 @@ margin-top: 70px;
     flex-wrap: wrap-reverse;
     width: 100%;
     background-color: black;
+  }
+  .form-select {
+    width: fit-content;
+  }
+  .container-fluid {
+    display: flex;
+    justify-content: flex-end;
+    width: 90%;
+    margin-top: 20px;
   }

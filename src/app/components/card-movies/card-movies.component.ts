@@ -32,5 +32,28 @@ export class CardMoviesComponent implements OnInit {
     this.getData(event.pageIndex + 1); // pageIndex comienza desde 0, por eso sumamos 1
   }
 
-
+  orderMovies(event: any) {
+    if (event.target.value === '2') {
+      console.log('entro al numero 2');
+      this.moviesData = this.moviesData.sort(function (a, b) {
+        if (a.title < b.title) {
+          return -1;
+        }
+        if (a.title > b.title) {
+          return 1;
+        }
+        return 0;
+      });
+    } else {
+      this.moviesData = this.moviesData.sort(function (a, b) {
+        if (b.title < a.title) {
+          return -1;
+        }
+        if (b.title > a.title) {
+          return 1;
+        }
+        return 0;
+      });
+    }
+  }
 }

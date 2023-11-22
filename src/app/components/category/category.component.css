@@ -33,3 +33,12 @@
         width: 100%;
         background-color: black;
       }
+      .form-select {
+        width: fit-content;
+      }
+      .container-fluid {
+        display: flex;
+        justify-content: flex-end;
+        width: 90%;
+        margin-top: 20px;
+      }
