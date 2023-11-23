@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MovieDetail} from 'src/app/models/movie.model';
 import { ApiService } from 'src/app/services/api.service';
 
+
 @Component({
   selector: 'app-movie-detail',
   templateUrl: './movie-detail.component.html',
@@ -40,11 +41,17 @@ export class MovieDetailComponent implements OnInit {
     private route: ActivatedRoute  /*se inyectan las dependencias */
   ) {}
   ngOnInit(): void {
-     this.api.getMovieDetail(this.route.snapshot.params["id"]).subscribe((response: any) => {
-      console.log(response);
+  console.log('route params:', this.route.snapshot.params);
+  if (this.api && this.route){
+    console.log('api service:', this.api);
+    console.log('movie id:', this.route.snapshot.params["id"]);
+    this.api.getMovieDetail(this.route.snapshot.params["id"]).subscribe((response: any) => {
+      console.log('response:', response);
       this.movieData = response;
-     });
+    });
   }
+}
+
 
 }
 
