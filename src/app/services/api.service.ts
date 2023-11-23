@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Movie } from 'src/app/models/movie.model';
+import { Movie, MovieDetail } from 'src/app/models/movie.model';
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +33,9 @@ export class ApiService {
         return this.http.get<Movie[]>(`${this.API}/discover/movie?api_key=${this.apiKey}&page=${page}&language=es-CL&with_genres=${genre}`);
     }
 
+    getMovieDetail(movieId: number): Observable<MovieDetail> {
+        return this.http.get<MovieDetail>(`${this.API}/movie/${movieId}?language=es&api_key=${this.apiKey}`)
+    }
 }
 
 /* métodos de solicitud HTTP

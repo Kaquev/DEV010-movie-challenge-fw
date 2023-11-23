@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { HeaderComponent } from '../header/header.component';
-import { CarouselComponent } from '../carousel/carousel.component';
+
 import { CardMoviesComponent } from '../card-movies/card-movies.component';
 import { ApiService } from 'src/app/services/api.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -14,7 +14,7 @@ describe('HomeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent, HeaderComponent, CarouselComponent, CardMoviesComponent],
+      declarations: [HomeComponent, HeaderComponent, CardMoviesComponent],
       providers: [ApiService],
       imports: [HttpClientTestingModule, BrowserAnimationsModule, MatPaginatorModule],
     });

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MovieResult } from 'src/app/models/movie.model';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -17,7 +17,8 @@ export class CategoryComponent implements OnInit {
 
   constructor(
     private api: ApiService,
-    private route: ActivatedRoute  /*se inyectan las dependencias */
+    private route: ActivatedRoute,  /*se inyectan las dependencias */
+    private router:  Router
   ) {}
 
   /*cuando se inicializa el componente (ngOnInit)
@@ -73,5 +74,7 @@ export class CategoryComponent implements OnInit {
       });
     }
   }
-
+  onImageClick(movieId: number): void {
+    this.router.navigate(['/movie-detail', movieId]);
+  }
 }

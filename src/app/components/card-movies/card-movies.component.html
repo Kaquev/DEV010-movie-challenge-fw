@@ -8,7 +8,7 @@
 <div class="card-movies container">
     <!-- Utilizamos *ngFor para iterar sobre las películas en moviesData -->
     <div *ngFor="let movie of moviesData" class="card">
-        <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="">
+        <img (click)="onImageClick(movie.id)" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="">
         <figcaption class="mat-caption text-center">{{ movie.title }} {{ movie.release_date | date:"yyyy" }}
         </figcaption>
     </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { MovieResult } from 'src/app/models/movie.model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,9 @@ export class CardMoviesComponent implements OnInit {
   public pageSizeOptions = [10, 20, 30]; // opciones de tamaño de página
 
   constructor(
-    private api: ApiService
+    private api: ApiService,
+    private router:  Router
+
   ) {}
   ngOnInit() {
     this.getData(1);
@@ -55,5 +58,8 @@ export class CardMoviesComponent implements OnInit {
         return 0;
       });
     }
+  }
+  onImageClick(movieId: number): void {
+    this.router.navigate(['/movie-detail', movieId]);
   }
 }
