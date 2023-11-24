@@ -10,6 +10,7 @@ export interface MovieResult {
   title: string;
   poster_path: string;
   release_date: string;
+  popularity: number;
 }
 
 export interface MovieDetail {

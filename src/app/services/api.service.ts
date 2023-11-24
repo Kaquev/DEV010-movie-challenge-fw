@@ -7,35 +7,46 @@ import { Movie, MovieDetail } from 'src/app/models/movie.model';
   providedIn: 'root',
 })
 export class ApiService {
+  private API = 'https://api.themoviedb.org/3/';
+  private apiKey = '77dad3c9e92f7d762ef6b6c944cca906';
 
-    private API = 'https://api.themoviedb.org/3/';
-    private apiKey = '77dad3c9e92f7d762ef6b6c944cca906';
+  constructor(private http: HttpClient) {}
 
-    constructor(
-        private http: HttpClient
-    ) {}
+  // Para obtener todo el listado de peliculas
+  // parametro es la pagina que quiero
+  getMoviesData(page: number): Observable<Movie[]> {
+    return this.http.get<Movie[]>(
+      `${this.API}/discover/movie?api_key=${this.apiKey}&page=${page}&language=es-CL`
+    );
+  }
 
-    // Para obtener todo el listado de peliculas
-    // parametro es la pagina que quiero
-    getMoviesData(page: number): Observable<Movie[]> {
-        return this.http.get<Movie[]>(`${this.API}/discover/movie?api_key=${this.apiKey}&page=${page}&language=es-CL`);
-    }
-
-    /*Se crea una nueva llamada a la API y se llama al endpoint genre/movie/list
+  /*Se crea una nueva llamada a la API y se llama al endpoint genre/movie/list
       para obtener los generos de las peliculas, como parametro le pasamos language=es*/
-    getMoviesGenres(): Observable<any> {
-        return this.http.get(`${this.API}/genre/movie/list?language=es&api_key=${this.apiKey}`);
-    }
+  getMoviesGenres(): Observable<any> {
+    return this.http.get(
+      `${this.API}/genre/movie/list?language=es&api_key=${this.apiKey}`
+    );
+  }
 
-    /*Para poder filtrar estos generos
+  /*Para poder filtrar estos generos
     le estoy pasando como parametro api key, page, language y with_genres */
-    getMoviesDataFilterByGenre(page: number, genre: number): Observable<Movie[]> {
-        return this.http.get<Movie[]>(`${this.API}/discover/movie?api_key=${this.apiKey}&page=${page}&language=es-CL&with_genres=${genre}`);
-    }
+  getMoviesDataFilterByGenre(page: number, genre: number): Observable<Movie[]> {
+    return this.http.get<Movie[]>(
+      `${this.API}/discover/movie?api_key=${this.apiKey}&page=${page}&language=es-CL&with_genres=${genre}`
+    );
+  }
 
-    getMovieDetail(movieId: number): Observable<MovieDetail> {
-        return this.http.get<MovieDetail>(`${this.API}/movie/${movieId}?language=es&api_key=${this.apiKey}`)
-    }
+  getMovieDetail(movieId: number): Observable<MovieDetail> {
+    return this.http.get<MovieDetail>(
+      `${this.API}/movie/${movieId}?language=es&api_key=${this.apiKey}`
+    );
+  }
+
+  getMovieByPopularity(page: number, order: string): Observable<Movie[]> {
+    return this.http.get<Movie[]>(
+      `${this.API}/discover/movie?api_key=${this.apiKey}&page=${page}&language=es-CL&sort_by=popularity.${order}`
+    );
+  }
 }
 
 /* métodos de solicitud HTTP
