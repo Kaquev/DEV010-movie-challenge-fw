@@ -2,13 +2,16 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CategoryComponent } from './category.component';
 import { HeaderComponent } from '../header/header.component';
 import { ApiService } from 'src/app/services/api.service';
-import { ActivatedRoute } from '@angular/router'; // Importa ActivatedRoute
+import { ActivatedRoute, Router } from '@angular/router'; // Importa ActivatedRoute
 import { of } from 'rxjs';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 describe('CategoryComponent', () => {
   let component: CategoryComponent;
   let fixture: ComponentFixture<CategoryComponent>;
-  let apiService: ApiService;
+  const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
   beforeEach(() => {
     // Creamos un objeto simulado (spy) de la clase ApiService.
@@ -19,7 +22,11 @@ describe('CategoryComponent', () => {
     const movieDataMock = {
       //se espera que devuelva un objeto que se asemeje a los datos getMoviesDataFilterByGenre
       total_pages: 1,
-      results: [],
+      results: [
+        { id: 1, title: 'Movie A', poster_path: '', release_date: '' },
+        { id: 2, title: 'Movie B', poster_path: '', release_date: '' },
+        { id: 3, title: 'Movie C', poster_path: '', release_date: '' },
+      ],
     };
 
     apiServiceSpy.getMoviesDataFilterByGenre.and.returnValue(of(movieDataMock));
@@ -40,17 +47,46 @@ describe('CategoryComponent', () => {
         // Proporcionamos el servicio simulado en lugar del servicio real.
         { provide: ApiService, useValue: apiServiceSpy },
         { provide: ActivatedRoute, useValue: activatedRouteStub },
+        { provide: Router, useValue: routerSpy },
+      ],
+      imports: [
+        HttpClientTestingModule,
+        BrowserAnimationsModule,
+        MatPaginatorModule,
       ],
     });
 
     fixture = TestBed.createComponent(CategoryComponent);
     component = fixture.componentInstance;
-    // Obtenemos una instancia del servicio simulado.
-    apiService = TestBed.inject(ApiService);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  // When the user selects option 1, the moviesData array should be sorted in descending order by title.
+  it('should sort moviesData array in descending order by title when option 1 is selected', () => {
+    component.orderMovies({ target: { value: '1' } });
+    expect(component.moviesData).toEqual([
+      { id: 3, title: 'Movie C', poster_path: '', release_date: '' },
+      { id: 2, title: 'Movie B', poster_path: '', release_date: '' },
+      { id: 1, title: 'Movie A', poster_path: '', release_date: '' },
+    ]);
+  });
+
+  it('should sort moviesData array in ascending order by title when option 2 is selected', () => {
+    component.orderMovies({ target: { value: '2' } });
+    expect(component.moviesData).toEqual([
+      { id: 1, title: 'Movie A', poster_path: '', release_date: '' },
+      { id: 2, title: 'Movie B', poster_path: '', release_date: '' },
+      { id: 3, title: 'Movie C', poster_path: '', release_date: '' },
+    ]);
+  });
+
+  it('should navigate to movie detail page with correct movie ID when clicking on an image', () => {
+    const movieId = 123;
+    component.onImageClick(movieId);
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/movie-detail', movieId]); // Usa routerSpy aquí
   });
 });

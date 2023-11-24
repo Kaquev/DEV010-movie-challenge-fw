@@ -14,17 +14,15 @@
                             CATEGORÍAS
                         </a>
                         <ul class="dropdown-menu">
-                            <div class="row">
-                                <div class="col-md-4" *ngFor="let item of genresSeparates">
-                                    <ul>
-                                        <li *ngFor="let genre of item;">
-                                            <a class="dropdown-item" routerLink="/category/{{ genre.id }}">
-                                                {{ genre.name }}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+
+                            <div class="container-list">
+                                <li *ngFor="let genre of moviesGenres;">
+                                    <a class="dropdown-item" routerLink="/category/{{ genre.id }}">
+                                        {{ genre.name }}
+                                    </a>
+                                </li>
                             </div>
+
                         </ul>
                     </li>
                 </ul>

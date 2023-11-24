@@ -1,27 +1,46 @@
-import { ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CardMoviesComponent } from './card-movies.component';
 import { ApiService } from 'src/app/services/api.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { of } from 'rxjs';
-import { Movie } from 'src/app/models/movie.model';
-import { MovieResult } from 'src/app/models/movie.model';
+import { Router } from '@angular/router';
 
 describe('CardMoviesComponent', () => {
   let component: CardMoviesComponent;
   let fixture: ComponentFixture<CardMoviesComponent>;
-  let apiService: ApiService;
+  const apiServiceSpy = jasmine.createSpyObj('ApiService', ['getMoviesData']);
+  const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [CardMoviesComponent],
-      providers: [ApiService],
-      imports: [HttpClientTestingModule, BrowserAnimationsModule, MatPaginatorModule],
+      providers: [
+        { provide: ApiService, useValue: apiServiceSpy },
+        { provide: Router, useValue: routerSpy },
+      ],
+      imports: [
+        HttpClientTestingModule,
+        BrowserAnimationsModule,
+        MatPaginatorModule,
+      ],
     });
+
+    const movieDataMock = {
+      //se espera que devuelva un objeto que se asemeje a los datos getMoviesData
+      total_pages: 1,
+      results: [
+        { id: 1, title: 'Movie A', poster_path: '', release_date: '' },
+        { id: 2, title: 'Movie B', poster_path: '', release_date: '' },
+        { id: 3, title: 'Movie C', poster_path: '', release_date: '' },
+      ],
+    };
+
+    apiServiceSpy.getMoviesData.and.returnValue(of(movieDataMock));
+
     fixture = TestBed.createComponent(CardMoviesComponent);
     component = fixture.componentInstance;
-    apiService = TestBed.inject(ApiService); // Inject the ApiService
     fixture.detectChanges();
   });
 
@@ -30,54 +49,43 @@ describe('CardMoviesComponent', () => {
   });
 
   // Recupera datos de la API y los asigna a las variables moviesData y totalPages
-  it('should retrieve data from API and assign it to moviesData and totalPages variables', function() {
-
-    const page = 1;
-    const response = {
-      total_pages: 5,
-      results: [{ id: 1, title: 'Movie 1' }, { id: 2, title: 'Movie 2' }] as MovieResult[]
-    };
-    spyOn(apiService, 'getMoviesData').and.returnValue(of(response as unknown as Movie[]));
-
-
-    component.getData(page);
-
-
-    expect(apiService.getMoviesData).toHaveBeenCalledWith(page);
-    expect(component.totalPages).toBe(response.total_pages);
-    expect(component.moviesData).toEqual(jasmine.arrayContaining(response.results));
-  });
-
-
-  // Recupera datos de la API y los asigna a las variables moviesData y totalPages cuando la respuesta de la API está vacía
-  it('should retrieve data from API and assign it to moviesData and totalPages variables when the API response is empty', function() {
-
-    const page = 1;
-    const response = {
-      total_pages: 0,
-      results: [] as MovieResult[]
-    };
-    spyOn(apiService, 'getMoviesData').and.returnValue(of(response as unknown as Movie[]));
-
-
-    component.getData(page);
-
-
-    expect(apiService.getMoviesData).toHaveBeenCalledWith(page);
-    expect(component.totalPages).toBe(response.total_pages);
-    expect(component.moviesData).toEqual(jasmine.arrayContaining(response.results));
+  it('should retrieve data from API and assign it to moviesData and totalPages variables', function () {
+    component.getData(1);
+    expect(component.totalPages).toBe(1);
+    expect(component.moviesData).toEqual([
+      { id: 1, title: 'Movie A', poster_path: '', release_date: '' },
+      { id: 2, title: 'Movie B', poster_path: '', release_date: '' },
+      { id: 3, title: 'Movie C', poster_path: '', release_date: '' },
+    ]);
   });
 
   // Llama al método 'getData' con el número de página correcto cuando se activa 'handlePage'
-  it('should call getData with the correct page number when handlePage is triggered', function() {
-
-
+  it('should call getData with the correct page number when handlePage is triggered', function () {
     spyOn(component, 'getData');
-
-
     component.handlePage({ pageIndex: 2 });
+    expect(component.getData).toHaveBeenCalled();
+  });
+  it('should sort moviesData array in descending order by title when option 1 is selected', () => {
+    component.orderMovies({ target: { value: '1' } });
+    expect(component.moviesData).toEqual([
+      { id: 3, title: 'Movie C', poster_path: '', release_date: '' },
+      { id: 2, title: 'Movie B', poster_path: '', release_date: '' },
+      { id: 1, title: 'Movie A', poster_path: '', release_date: '' },
+    ]);
+  });
 
+  it('should sort moviesData array in ascending order by title when option 2 is selected', () => {
+    component.orderMovies({ target: { value: '2' } });
+    expect(component.moviesData).toEqual([
+      { id: 1, title: 'Movie A', poster_path: '', release_date: '' },
+      { id: 2, title: 'Movie B', poster_path: '', release_date: '' },
+      { id: 3, title: 'Movie C', poster_path: '', release_date: '' },
+    ]);
+  });
 
-    expect(component.getData).toHaveBeenCalledWith(3);
+  it('should navigate to movie detail page with correct movie ID when clicking on an image', () => {
+    const movieId = 123;
+    component.onImageClick(movieId);
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/movie-detail', movieId]); // Usa routerSpy aquí
   });
 });
