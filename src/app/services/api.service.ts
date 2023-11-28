@@ -9,6 +9,7 @@ import { Movie, MovieDetail } from 'src/app/models/movie.model';
 export class ApiService {
   private API = 'https://api.themoviedb.org/3/';
   private apiKey = '77dad3c9e92f7d762ef6b6c944cca906';
+  public filterSelected: string = '';
 
   constructor(private http: HttpClient) {}
 
@@ -42,10 +43,20 @@ export class ApiService {
     );
   }
 
-  getMovieByPopularity(page: number, order: string): Observable<Movie[]> {
-    return this.http.get<Movie[]>(
-      `${this.API}/discover/movie?api_key=${this.apiKey}&page=${page}&language=es-CL&sort_by=popularity.${order}`
-    );
+  getMovieByPopularity(
+    page: number,
+    order: string,
+    genreId: number
+  ): Observable<Movie[]> {
+    if (genreId === 0) {
+      return this.http.get<Movie[]>(
+        `${this.API}/discover/movie?api_key=${this.apiKey}&page=${page}&language=es-CL&sort_by=popularity.${order}`
+      );
+    } else {
+      return this.http.get<Movie[]>(
+        `${this.API}/discover/movie?api_key=${this.apiKey}&page=${page}&language=es-CL&sort_by=popularity.${order}&with_genres=${genreId}`
+      );
+    }
   }
 }
 

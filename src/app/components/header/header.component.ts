@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
 
   // Método para navegar a la página de inicio
   goHome() {
+    this.api.filterSelected = '';
     this.router.navigate(['/']);
   }
 }

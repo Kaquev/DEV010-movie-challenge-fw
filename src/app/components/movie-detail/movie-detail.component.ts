@@ -9,7 +9,6 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./movie-detail.component.css'],
 })
 export class MovieDetailComponent implements OnInit {
-  // Propiedad que almacena los detalles de la película
   public movieData: MovieDetail = {
     adult: false,
     backdrop_path: '',
@@ -41,17 +40,13 @@ export class MovieDetailComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     console.log('route params:', this.route.snapshot.params);
-    // Verifica que tanto el servicio API como la ruta estén presentes
     if (this.api && this.route) {
       console.log('api service:', this.api);
       console.log('movie id:', this.route.snapshot.params['id']);
-
-      // Llama al servicio para obtener los detalles de la película
       this.api
         .getMovieDetail(this.route.snapshot.params['id'])
         .subscribe((response: any) => {
           console.log('response:', response);
-          // Asigna los detalles de la película a la propiedad movieData
           this.movieData = response;
         });
     }

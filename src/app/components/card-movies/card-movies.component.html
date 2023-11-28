@@ -1,10 +1,9 @@
 <div class="container-fluid">
-    <select id="order-selector" class="form-select form-select-sm" (change)="orderMovies($event)">
-        <option value="">select order</option>
-        <option value="1">Order by A-Z</option>
-        <option value="2">Order by Z-A</option>
-        <option value="3">Order by desc</option>
-        <option value="4">Order by asc</option>
+    <select id="order-selector" [(ngModel)]="selected" class="form-select form-select-sm"
+        (change)="orderMovies($event)">
+        <option value="">Select Order</option>
+        <option value="1"> by Popularity desc</option>
+        <option value="2"> by Popularity asc</option>
     </select>
 </div>
 <div class="card-movies container">

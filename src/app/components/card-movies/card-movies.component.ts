@@ -17,12 +17,18 @@ export class CardMoviesComponent implements OnInit {
   public page_size = 20; // ajusta el tamaño de la página según tus necesidades
   public pageSizeOptions = [10, 20, 30]; // opciones de tamaño de página
   public defaultImg = './../../../assets/images/404.svg'; //img por defecto
+  public selected = '';
 
   constructor(private api: ApiService, private router: Router) {}
 
   // Método del ciclo de vida OnInit
   ngOnInit() {
-    this.getData(1);
+    if (this.api.filterSelected !== '') {
+      this.selected = this.api.filterSelected;
+      this.orderPopularity(1, this.api.filterSelected);
+    } else {
+      this.getData(1);
+    }
   }
 
   // Método para obtener datos de películas
@@ -40,30 +46,11 @@ export class CardMoviesComponent implements OnInit {
 
   // Método para ordenar películas
   orderMovies(event: any) {
-    if (event.target.value > '2') {
-      this.orderPopularity(1, event.target.value);
+    this.api.filterSelected = event.target.value;
+    if (event.target.value === '') {
+      this.getData(1);
     } else {
-      if (event.target.value === '2') {
-        this.moviesData = this.moviesData.sort(function (a, b) {
-          if (a.title < b.title) {
-            return -1;
-          }
-          if (a.title > b.title) {
-            return 1;
-          }
-          return 0;
-        });
-      } else {
-        this.moviesData = this.moviesData.sort(function (a, b) {
-          if (b.title < a.title) {
-            return -1;
-          }
-          if (b.title > a.title) {
-            return 1;
-          }
-          return 0;
-        });
-      }
+      this.orderPopularity(1, event.target.value);
     }
   }
 
@@ -71,12 +58,12 @@ export class CardMoviesComponent implements OnInit {
   orderPopularity(page: number, order: string) {
     this.totalPages = 0;
     this.moviesData = [];
-    if (order === '3') {
+    if (order === '1') {
       order = 'desc';
     } else {
       order = 'asc';
     }
-    this.api.getMovieByPopularity(page, order).subscribe((response: any) => {
+    this.api.getMovieByPopularity(page, order, 0).subscribe((response: any) => {
       this.totalPages = response.total_pages;
       this.moviesData = response['results'];
     });
