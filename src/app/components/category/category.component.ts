@@ -74,19 +74,14 @@ export class CategoryComponent implements OnInit {
   orderPopularity(page: number, order: string) {
     this.totalPages = 0;
     this.moviesData = [];
-    if (order === '1') {
-      order = 'desc';
-    } else {
-      order = 'asc';
-    }
-    const genreId = this.route.snapshot.params['id'];
     this.api
-      .getMovieByPopularity(page, order, genreId)
+      .orderMoviesByPopularity(page, order, this.route.snapshot.params['id'])
       .subscribe((response: any) => {
         this.totalPages = response.total_pages;
         this.moviesData = response['results'];
       });
   }
+
   onImageClick(movieId: number): void {
     this.router.navigate(['/movie-detail', movieId]);
   }

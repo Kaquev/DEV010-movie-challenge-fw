@@ -23,9 +23,11 @@ export class CardMoviesComponent implements OnInit {
 
   // Método del ciclo de vida OnInit
   ngOnInit() {
+    // Verifica si hay una opción de ordenación almacenada y aplica la ordenación
     if (this.api.filterSelected !== '') {
       this.selected = this.api.filterSelected;
       this.orderPopularity(1, this.api.filterSelected);
+      // Si no hay opción de ordenación almacenada, carga los datos por defecto
     } else {
       this.getData(1);
     }
@@ -58,15 +60,12 @@ export class CardMoviesComponent implements OnInit {
   orderPopularity(page: number, order: string) {
     this.totalPages = 0;
     this.moviesData = [];
-    if (order === '1') {
-      order = 'desc';
-    } else {
-      order = 'asc';
-    }
-    this.api.getMovieByPopularity(page, order, 0).subscribe((response: any) => {
-      this.totalPages = response.total_pages;
-      this.moviesData = response['results'];
-    });
+    this.api
+      .orderMoviesByPopularity(page, order, 0)
+      .subscribe((response: any) => {
+        this.totalPages = response.total_pages;
+        this.moviesData = response['results'];
+      });
   }
 
   // Método para manejar clic en una imagen de película

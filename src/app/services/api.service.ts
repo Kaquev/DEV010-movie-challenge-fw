@@ -43,20 +43,22 @@ export class ApiService {
     );
   }
 
-  getMovieByPopularity(
+  /* Este método obtiene películas
+  ordenadas por popularidad, permitiendo filtrar por género
+  si es necesario.   */
+  orderMoviesByPopularity(
     page: number,
     order: string,
     genreId: number
   ): Observable<Movie[]> {
-    if (genreId === 0) {
-      return this.http.get<Movie[]>(
-        `${this.API}/discover/movie?api_key=${this.apiKey}&page=${page}&language=es-CL&sort_by=popularity.${order}`
-      );
-    } else {
-      return this.http.get<Movie[]>(
-        `${this.API}/discover/movie?api_key=${this.apiKey}&page=${page}&language=es-CL&sort_by=popularity.${order}&with_genres=${genreId}`
-      );
-    }
+    const sortOrder = order === '1' ? 'desc' : 'asc'; //if ternario
+    /*Si order es igual a '1', orden descendente de lo contrario, orden ascendente */
+    const url =
+      genreId === 0
+        ? `${this.API}/discover/movie?api_key=${this.apiKey}&page=${page}&language=es-CL&sort_by=popularity.${sortOrder}`
+        : `${this.API}/discover/movie?api_key=${this.apiKey}&page=${page}&language=es-CL&sort_by=popularity.${sortOrder}&with_genres=${genreId}`;
+
+    return this.http.get<Movie[]>(url);
   }
 }
 
