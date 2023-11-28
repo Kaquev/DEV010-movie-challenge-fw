@@ -8,23 +8,24 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  public moviesGenres: any;
-  public genresSeparates: any = [];
+  public moviesGenres: any; // Almacena los géneros de las películas obtenidos del servicio
+  public genresSeparates: any = []; // Almacena los géneros divididos en grupos
 
   constructor(private api: ApiService, private router: Router) {}
   ngOnInit() {
-    this.getMoviesGenres();
+    this.getMoviesGenres(); // Al iniciar el componente, se obtienen los géneros de las películas
   }
 
-  /* getMoviesGenres llama al servicio ApiService para obtener
-  los géneros de las películas. Luego llama a divideArrayGenres
-  para dividir los géneros en grupos.*/
+  /* Método para obtener los géneros de las películas.
+  Llama al servicio ApiService y luego divide
+  los géneros en grupos. */
   getMoviesGenres() {
     this.api.getMoviesGenres().subscribe((response: any) => {
       this.moviesGenres = response['genres'];
     });
   }
 
+  // Método para navegar a la página de inicio
   goHome() {
     this.router.navigate(['/']);
   }

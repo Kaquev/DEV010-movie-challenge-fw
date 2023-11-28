@@ -37,3 +37,9 @@ export interface MovieDetail {
   vote_average: number;
   vote_count: number;
 }
+/* En este código, he definido una interfaz que sirve
+como un contrato para manipular mi API.
+Esta interfaz establece las propiedades y
+métodos que deben ser implementados por cualquier
+clase que desee interactuar con la API en este contexto
+específico.*/
