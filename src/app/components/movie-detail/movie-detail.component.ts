@@ -35,7 +35,7 @@ export class MovieDetailComponent implements OnInit {
   };
 
   constructor(
-    private api: ApiService,
+    protected api: ApiService,
     private route: ActivatedRoute /*se inyectan las dependencias */
   ) {}
   ngOnInit(): void {

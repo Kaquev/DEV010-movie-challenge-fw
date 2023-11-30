@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { MovieResult } from 'src/app/models/movie.model';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-card-movies',
@@ -19,7 +20,7 @@ export class CardMoviesComponent implements OnInit {
   public defaultImg = './../../../assets/images/404.svg'; //img por defecto
   public selected = '';
 
-  constructor(private api: ApiService, private router: Router) {}
+  constructor(protected api: ApiService, private router: Router) {}
 
   // Método del ciclo de vida OnInit
   ngOnInit() {
@@ -60,12 +61,14 @@ export class CardMoviesComponent implements OnInit {
   orderPopularity(page: number, order: string) {
     this.totalPages = 0;
     this.moviesData = [];
-    this.api
-      .orderMoviesByPopularity(page, order, 0)
-      .subscribe((response: any) => {
+    const observable$ = this.api.orderMoviesByPopularity(page, order, 0);
+
+    if (observable$) {
+      observable$.subscribe((response: any) => {
         this.totalPages = response.total_pages;
         this.moviesData = response['results'];
       });
+    }
   }
 
   // Método para manejar clic en una imagen de película

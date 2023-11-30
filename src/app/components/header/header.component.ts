@@ -11,7 +11,7 @@ export class HeaderComponent implements OnInit {
   public moviesGenres: any; // Almacena los géneros de las películas obtenidos del servicio
   public genresSeparates: any = []; // Almacena los géneros divididos en grupos
 
-  constructor(private api: ApiService, private router: Router) {}
+  constructor(protected api: ApiService, private router: Router) {}
   ngOnInit() {
     this.getMoviesGenres(); // Al iniciar el componente, se obtienen los géneros de las películas
   }

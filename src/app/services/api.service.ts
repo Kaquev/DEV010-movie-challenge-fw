@@ -7,11 +7,11 @@ import { Movie, MovieDetail } from 'src/app/models/movie.model';
   providedIn: 'root',
 })
 export class ApiService {
-  private API = 'https://api.themoviedb.org/3/';
-  private apiKey = '77dad3c9e92f7d762ef6b6c944cca906';
+  protected API = 'https://api.themoviedb.org/3/';
+  protected apiKey = '77dad3c9e92f7d762ef6b6c944cca906';
   public filterSelected: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(protected http: HttpClient) {}
 
   // Para obtener todo el listado de peliculas
   // parametro es la pagina que quiero

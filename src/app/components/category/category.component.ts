@@ -17,7 +17,7 @@ export class CategoryComponent implements OnInit {
   public selected = '';
 
   constructor(
-    private api: ApiService,
+    protected api: ApiService,
     private route: ActivatedRoute /*se inyectan las dependencias */,
     private router: Router
   ) {}
