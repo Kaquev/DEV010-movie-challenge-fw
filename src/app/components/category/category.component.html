@@ -12,7 +12,7 @@
     <div class="card-movies container">
         <!-- Utilizamos *ngFor para iterar sobre las películas en moviesData -->
         <div *ngFor="let movie of moviesData" class="card">
-            <img (click)="onImageClick(movie.id)"
+            <img class="img-card" (click)="onImageClick(movie.id)"
                 [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w500/' + movie.poster_path : defaultImg"
                 alt="Poster de pelicula">
             <figcaption class="mat-caption text-center">{{ movie.title }} {{ movie.release_date | date:"yyyy" }}

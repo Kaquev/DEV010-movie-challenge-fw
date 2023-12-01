@@ -2,8 +2,8 @@
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(2, 1fr);
-  background-color: #dcc9b3;
-  color: black;
+  background-color: #111211;
+  color: white;
 }
 figure {
   display: flex;
@@ -25,6 +25,7 @@ img {
 }
 .valoracion {
   font-weight: 400;
+  gap: 4px;
 }
 .sinopsis {
   width: 80%;
@@ -39,4 +40,7 @@ h1 {
 }
 p {
   display: flex;
+}
+.generos {
+  display: contents;
 }
