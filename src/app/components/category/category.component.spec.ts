@@ -5,9 +5,10 @@ import { ApiService } from 'src/app/services/api.service';
 import { ActivatedRoute, Router } from '@angular/router'; // Importa ActivatedRoute
 import { of } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('CategoryComponent', () => {
   let component: CategoryComponent;
