@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CategoryComponent } from './category.component';
-import { HeaderComponent } from '../header/header.component';
+import { CategoryComponent } from '../app/components/category/category.component';
+import { HeaderComponent } from '../app/components/header/header.component';
 import { ApiService } from 'src/app/services/api.service';
 import { ActivatedRoute, Router } from '@angular/router'; // Importa ActivatedRoute
 import { of } from 'rxjs';

@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MovieDetailComponent } from './movie-detail.component';
+import { MovieDetailComponent } from '../app/components/movie-detail/movie-detail.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { HeaderComponent } from '../header/header.component';
+import { HeaderComponent } from '../app/components/header/header.component';
 import { ApiService } from 'src/app/services/api.service';
 import { of } from 'rxjs';
 
