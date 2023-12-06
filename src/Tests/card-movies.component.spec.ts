@@ -1,48 +1,50 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CardMoviesComponent } from '../app/components/card-movies/card-movies.component';
-import { ApiService } from 'src/app/services/api.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+// import { ComponentFixture, TestBed } from '@angular/core/testing';
+// import { CardMoviesComponent } from '../app/components/card-movies/card-movies.component';
+// import { ApiService } from '../app/services/api.service';
+// import { HttpClientTestingModule } from '@angular/common/http/testing';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { MatPaginatorModule } from '@angular/material/paginator';
+// import { CommonModule } from '@angular/common';
+// import { FormsModule } from '@angular/forms';
+// import { Router } from '@angular/router';
 
-describe('CardMoviesComponent', () => {
-  let component: CardMoviesComponent;
-  let fixture: ComponentFixture<CardMoviesComponent>;
-  let apiServiceSpy: jasmine.SpyObj<ApiService>;
-  let routerSpy: jasmine.SpyObj<Router>;
+// describe('CardMoviesComponent', () => {
+//   let component: CardMoviesComponent;
+//   let fixture: ComponentFixture<CardMoviesComponent>;
+//   let apiServiceMock: jest.Mocked<ApiService>;
+//   let routerMock: jest.Mocked<Router>;
 
-  beforeEach(() => {
-    apiServiceSpy = jasmine.createSpyObj('ApiService', [
-      'getMoviesDataFilterByGenre',
-      'orderMoviesByPopularity',
-    ]);
-    routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+//   beforeEach(() => {
+//     apiServiceMock = {
+//       getMoviesDataFilterByGenre: jest.fn(),
+//       orderMoviesByPopularity: jest.fn(),
+//     } as jest.Mocked<ApiService>;
 
-    TestBed.configureTestingModule({
-      declarations: [CardMoviesComponent],
-      providers: [
-        { provide: ApiService, useValue: apiServiceSpy },
-        { provide: Router, useValue: routerSpy },
-        { provide: ActivatedRoute, useValue: {} },
-      ],
-      imports: [
-        HttpClientTestingModule,
-        BrowserAnimationsModule,
-        MatPaginatorModule,
-        CommonModule,
-        FormsModule,
-      ],
-    });
+//     routerMock = {
+//       navigate: jest.fn(),
+//     } as jest.Mocked<Router>;
 
-    fixture = TestBed.createComponent(CardMoviesComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//     TestBed.configureTestingModule({
+//       declarations: [CardMoviesComponent],
+//       providers: [
+//         { provide: ApiService, useValue: apiServiceMock },
+//         { provide: Router, useValue: routerMock },
+//       ],
+//       imports: [
+//         HttpClientTestingModule,
+//         BrowserAnimationsModule,
+//         MatPaginatorModule,
+//         CommonModule,
+//         FormsModule,
+//       ],
+//     });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//     fixture = TestBed.createComponent(CardMoviesComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
+
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

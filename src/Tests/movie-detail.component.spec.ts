@@ -3,7 +3,7 @@ import { MovieDetailComponent } from '../app/components/movie-detail/movie-detai
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { HeaderComponent } from '../app/components/header/header.component';
-import { ApiService } from 'src/app/services/api.service';
+import { ApiService } from '../app/services/api.service';
 import { of } from 'rxjs';
 
 describe('MovieDetailComponent', () => {
@@ -11,41 +11,44 @@ describe('MovieDetailComponent', () => {
   let fixture: ComponentFixture<MovieDetailComponent>;
   let apiService: ApiService;
 
-  let activatedRouteStub;
-
   beforeEach(() => {
-    const apiServiceSpy = jasmine.createSpyObj('ApiService', [
-      'getMovieDetail',
-      'getMoviesGenres',
-    ]);
+    //objeto mock para ApiService
+    const apiServiceSpy = {
+      getMovieDetail: jest.fn(),
+      getMoviesGenres: jest.fn(),
+    };
+
+    // Configurar los valores de retorno esperados para los métodos mockeados si es necesario
+
     const movieDetailMock = {
       // Agrega aquí los campos que esperas de getMovieDetail
     };
-    apiServiceSpy.getMovieDetail.and.returnValue(of(movieDetailMock));
+    apiServiceSpy.getMovieDetail.mockReturnValue(of(movieDetailMock));
 
-    activatedRouteStub = {
+    const activatedRouteStub = {
       snapshot: {
-        params: { id: '14' }, // Asegúrate de proporcionar un ID válido aquí
+        paramMap: { get: jest.fn().mockReturnValue('14') },
       },
     };
+
     const movieGenresMock: { id: number; name: string }[] = [
-      //géneros de películas que esperas de getMoviesGenres
+      // Géneros de películas que esperas de getMoviesGenres
       { id: 1, name: 'Acción' },
       { id: 2, name: 'Aventura' },
     ];
-    apiServiceSpy.getMoviesGenres.and.returnValue(of(movieGenresMock));
+    apiServiceSpy.getMoviesGenres.mockReturnValue(of(movieGenresMock));
 
     TestBed.configureTestingModule({
       declarations: [MovieDetailComponent, HeaderComponent],
       imports: [HttpClientModule],
       providers: [
-        { provide: ApiService, useValue: apiServiceSpy }, // Incluye el servicio ApiService
+        { provide: ApiService, useValue: apiServiceSpy },
         { provide: ActivatedRoute, useValue: activatedRouteStub },
       ],
     });
     fixture = TestBed.createComponent(MovieDetailComponent);
     component = fixture.componentInstance;
-    apiService = TestBed.inject(ApiService); // Utiliza TestBed.inject para obtener el servicio
+    apiService = TestBed.inject(ApiService);
     fixture.detectChanges();
   });
 

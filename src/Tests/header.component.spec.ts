@@ -1,37 +1,41 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from '../app/components/header/header.component';
-import { ApiService } from 'src/app/services/api.service';
+import { ApiService } from '../app/services/api.service';
 import { of } from 'rxjs';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 describe('HeaderComponent', () => {
-  let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
-  const apiServiceSpy = jasmine.createSpyObj('ApiService', ['getMoviesGenres']);
 
-  beforeEach(() => {
+  beforeEach(async () => {
+    // objeto mock para ApiService
+    const apiServiceSpy = {
+      getMoviesGenres: jest.fn(() => of({ genres: [] })),
+    };
     const movieGenresMock = {
       genres: [],
     };
-    apiServiceSpy.getMoviesGenres.and.returnValue(of(movieGenresMock));
+    apiServiceSpy.getMoviesGenres.mockReturnValue(of(movieGenresMock));
+
     const activatedRouteStub = {
-      params: of({ id: '14' }), // Proporciona un ID de genero válido
+      params: of({ id: '14' }), // Proporciona un ID de género válido
     };
-    TestBed.configureTestingModule({
+
+    await TestBed.configureTestingModule({
       declarations: [HeaderComponent],
-      imports: [HttpClientModule, RouterModule],
+      imports: [HttpClientModule],
       providers: [
         { provide: ApiService, useValue: apiServiceSpy },
         { provide: ActivatedRoute, useValue: activatedRouteStub },
       ],
-    });
+    }).compileComponents();
+
     fixture = TestBed.createComponent(HeaderComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
+    const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
 });
