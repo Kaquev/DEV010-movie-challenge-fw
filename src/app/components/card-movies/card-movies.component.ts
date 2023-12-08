@@ -2,33 +2,29 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { MovieResult } from 'src/app/models/movie.model';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-card-movies',
-  /*Se puede utilizar en plantillas con <app-card-movies></app-card-movies>.*/
+
   templateUrl: './card-movies.component.html',
-  /* la vista del componente. */
+
   styleUrls: ['./card-movies.component.css'],
 })
 export class CardMoviesComponent implements OnInit {
   /*propiedades del componente */
   public moviesData: MovieResult[] = [];
   public totalPages: number = 0;
-  public page_size = 20; // ajusta el tamaño de la página según tus necesidades
-  public pageSizeOptions = [10, 20, 30]; // opciones de tamaño de página
-  public defaultImg = './../../../assets/images/404.svg'; //img por defecto
+  public page_size = 20;
+  public pageSizeOptions = [10, 20, 30];
+  public defaultImg = './../../../assets/images/404.svg';
   public selected = '';
 
   constructor(protected api: ApiService, private router: Router) {}
 
-  // Método del ciclo de vida OnInit
   ngOnInit() {
-    // Verifica si hay una opción de ordenación almacenada y aplica la ordenación
     if (this.api.filterSelected !== '') {
       this.selected = this.api.filterSelected;
       this.orderPopularity(1, this.api.filterSelected);
-      // Si no hay opción de ordenación almacenada, carga los datos por defecto
     } else {
       this.getData(1);
     }
@@ -44,7 +40,7 @@ export class CardMoviesComponent implements OnInit {
 
   // Método para manejar cambio de página
   handlePage(event: any) {
-    this.getData(event.pageIndex + 1); // pageIndex comienza desde 0, por eso sumamos 1
+    this.getData(event.pageIndex + 1);
   }
 
   // Método para ordenar películas

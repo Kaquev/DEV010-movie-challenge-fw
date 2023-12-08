@@ -8,12 +8,11 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  public moviesGenres: any; // Almacena los géneros de las películas obtenidos del servicio
-  public genresSeparates: any = []; // Almacena los géneros divididos en grupos
-
+  public moviesGenres: any;
+  public genresSeparates: any = [];
   constructor(protected api: ApiService, private router: Router) {}
   ngOnInit() {
-    this.getMoviesGenres(); // Al iniciar el componente, se obtienen los géneros de las películas
+    this.getMoviesGenres(); //
   }
 
   /* Método para obtener los géneros de las películas.

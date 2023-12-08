@@ -51,8 +51,8 @@ export class ApiService {
     order: string,
     genreId: number
   ): Observable<Movie[]> {
-    const sortOrder = order === '1' ? 'desc' : 'asc'; //if ternario
-    /*Si order es igual a '1', orden descendente de lo contrario, orden ascendente */
+    const sortOrder = order === '1' ? 'desc' : 'asc';
+
     const url =
       genreId === 0
         ? `${this.API}/discover/movie?api_key=${this.apiKey}&page=${page}&language=es-CL&sort_by=popularity.${sortOrder}`
@@ -61,11 +61,3 @@ export class ApiService {
     return this.http.get<Movie[]>(url);
   }
 }
-
-/* métodos de solicitud HTTP
-GET: Se utiliza para solicitar datos de un recurso especificado.
-POST: Se utiliza para enviar datos a un servidor para crear un recurso.
-PUT: Se utiliza para actualizar un recurso existente con nuevos datos.
-DELETE: Se utiliza para eliminar un recurso especificado.
--protocolo HTTP-
- */

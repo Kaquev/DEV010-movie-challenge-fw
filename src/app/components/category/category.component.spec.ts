@@ -16,15 +16,13 @@ describe('CategoryComponent', () => {
   const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
   beforeEach(() => {
-    // Creamos un objeto simulado (spy) de la clase ApiService.
     const apiServiceSpy = jasmine.createSpyObj('ApiService', [
       'getMovieDetail',
       'getMoviesGenres',
       'orderMoviesByPopularity',
-      'getMoviesDataFilterByGenre', // Agrega la función aquí
+      'getMoviesDataFilterByGenre',
     ]);
     const movieDataMock = {
-      //se espera que devuelva un objeto que se asemeje a los datos getMoviesDataFilterByGenre
       total_pages: 1,
       results: [
         {
@@ -40,7 +38,6 @@ describe('CategoryComponent', () => {
     apiServiceSpy.getMoviesDataFilterByGenre.and.returnValue(of(movieDataMock));
 
     const movieGenresMock = [
-      // Agrega aquí los géneros de películas que esperas de getMoviesGenres
       { id: 1, name: 'Acción' },
       { id: 2, name: 'Aventura' },
     ];
@@ -49,7 +46,6 @@ describe('CategoryComponent', () => {
     TestBed.configureTestingModule({
       declarations: [CategoryComponent, HeaderComponent],
       providers: [
-        // Proporcionamos el servicio simulado en lugar del servicio real.
         { provide: ApiService, useValue: apiServiceSpy },
         { provide: ActivatedRoute, useValue: { params: of({ id: '18' }) } },
         { provide: Router, useValue: routerSpy },

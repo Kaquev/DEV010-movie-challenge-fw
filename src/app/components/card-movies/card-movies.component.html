@@ -7,7 +7,7 @@
     </select>
 </div>
 <div class="card-movies container">
-    <!-- Utilizamos *ngFor para iterar sobre las películas en moviesData -->
+
     <div *ngFor="let movie of moviesData" class="card">
         <img class="img-card" (click)="onImageClick(movie.id)"
             [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w500/' + movie.poster_path : defaultImg"
