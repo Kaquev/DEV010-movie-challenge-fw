@@ -1,27 +1,48 @@
-# MovieApp
+### Descripción del Proyecto
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.0.
+Movie Challenge (GOU!) es un proyecto dedicado a crear una experiencia de exploración de películas utilizando datos de
+The Movie Database API V3. Este proyecto aprovecha las capacidades de Angular, Angular Material y Bootstrap para ofrecer
+una aplicación visualmente atractiva.
 
-## Development server
+### Objetivo Principal
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+El objetivo principal de este proyecto es desarrollar una página web interactiva que permita a los usuarios visualizar,
+filtrar y ordenar ya sea por género, u otro criterio. el catálogo de películas disponible en The Movie Database API V3.
 
-## Code scaffolding
+### Tecnologías Utilizadas
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Para llevar a cabo este desafío, he utilizado Angular v16, un framework robusto y escalable para la construcción de
+aplicaciones web. Angular Material y Bootstrap se han integrado para aprovechar componentes visuales preestablecidos y
+facilitar el diseño y la presentación.
 
-## Build
+Además, se han utilizado las siguientes herramientas y conceptos clave:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **HTML y CSS:** Utilización de HTML semántico, estilos modernos y el sistema de diseño de Angular Material para una
+  presentación atractiva y consistente.
 
-## Running unit tests
+- **TypeScript:** Implementación de lógica de aplicación avanzada, aprovechando la potencia de un lenguaje tipado.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **Angular Material y Bootstrap:** Integración de componentes visuales preestablecidos para garantizar una interfaz de
+  usuario coherente y agradable.
 
-## Running end-to-end tests
+- **Git y GitHub:** Control de versiones para un desarrollo colaborativo y seguimiento de cambios a lo largo del
+  proyecto.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Estrategia de Desarrollo
 
-## Further help
+El proyecto se ha abordado siguiendo una metodología ágil, dividida en sprints de 1 semana cada uno. Desde la creación
+de prototipos de baja y alta fidelidad en Figma hasta la implementación de características clave, como la visualización
+del catálogo, filtros y ordenamientos. Tambien se diseno un logo para darle un toque personal al proyecto.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Despliegue
+
+La aplicación final se desplegará utilizando la plataforma de despliegue [Vercel](https://vercel.com/), que facilita el
+despliegue de aplicaciones web estáticas y dinámicas. Esto permitirá que la aplicación sea accesible para el público,
+brindando una experiencia de usuario real.
+
+## Prototipos de Diseño
+
+- [Prototipo de Baja Fidelidad en
+  Figma](https://www.figma.com/file/nd1x2cDip1yS5VluUvZWHe/MCDEV010?type=design&node-id=0%3A1&mode=design&t=BA18FYUuJa1dYdVK-1)
+- [Prototipo de Alta Fidelidad en
+  Figma](https://www.figma.com/file/nd1x2cDip1yS5VluUvZWHe/MCDEV010?type=design&node-id=4%3A13599&mode=design&t=BA18FYUuJa1dYdVK-1)
