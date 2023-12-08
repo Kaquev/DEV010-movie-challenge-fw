@@ -1,0 +1,28 @@
+<app-header></app-header>
+
+<main>
+    <div class="container-fluid">
+        <select id="order-selector" [(ngModel)]="selected" class="form-select form-select-sm"
+            (change)="orderMovies($event)">
+            <option value="">Select Order</option>
+            <option value="1"> by Popularity desc</option>
+            <option value="2"> by Popularity asc</option>
+        </select>
+    </div>
+    <div class="card-movies container">
+        <!-- Utilizamos *ngFor para iterar sobre las películas en moviesData -->
+        <div *ngFor="let movie of moviesData" class="card">
+            <img class="img-card" (click)="onImageClick(movie.id)"
+                [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w500/' + movie.poster_path : defaultImg"
+                alt="Poster de pelicula">
+            <figcaption class="mat-caption text-center">{{ movie.title }} {{ movie.release_date | date:"yyyy" }}
+            </figcaption>
+        </div>
+    </div>
+
+    <div class="paginator" *ngIf="moviesData.length > 0"> <!--solo si hay películas en moviesData-->
+        <mat-paginator [length]="totalPages * page_size" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions"
+            aria-label="Seleccionar página" (page)="handlePage($event)">
+        </mat-paginator>
+    </div>
+</main>

@@ -1,0 +1,22 @@
+<app-header></app-header>
+
+<div class="details-movie">
+    <div class="title">
+        <h1>{{ movieData.original_title }} {{ movieData.release_date | date:"(yyyy)" }}</h1>
+        <p>Fecha de estreno: {{movieData.release_date | date:"(dd-MM-yy)"}} </p>
+        <p class="generos" *ngFor="let item of movieData.genres"> {{item.name}} </p>
+        <hr>
+        <p class="valoracion"> Promedio valoracion: <strong> {{movieData.vote_average}} </strong> Total de votos:
+            <strong> {{movieData.vote_count}} </strong>
+        </p>
+        <div class="sinopsis">
+            <h1>Sinopsis</h1>
+            <p>
+                {{movieData.overview}}
+            </p>
+        </div>
+    </div>
+    <figure>
+        <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500/' + movieData.poster_path" alt="">
+    </figure>
+</div>
