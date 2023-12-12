@@ -8,6 +8,7 @@ una aplicación visualmente atractiva.
 
 El objetivo principal de este proyecto es desarrollar una página web interactiva que permita a los usuarios visualizar,
 filtrar y ordenar ya sea por género, u otro criterio. el catálogo de películas disponible en The Movie Database API V3.
+(No responsivo).
 
 ### Tecnologías Utilizadas
 
